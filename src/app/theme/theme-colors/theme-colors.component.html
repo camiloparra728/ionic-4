@@ -1,0 +1,15 @@
+
+<ion-list no-padding no-margin>
+    <ion-list-header color="dark">
+      <ion-label class="fw700">Elige un color para cambiar de tema</ion-label>
+    </ion-list-header>
+
+    <ion-item color="primary" class="text-10" >
+
+      <ion-chip>
+        <ion-avatar *ngFor="let item of colors" class="margin-avatars" [ngStyle]="{'background-color': item.color}" (click)="toggleAppTheme(item.class)">      
+        </ion-avatar>
+      </ion-chip>
+    </ion-item>
+
+</ion-list>

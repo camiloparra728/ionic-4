@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Consultar
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card class="welcome-card">
+      <ion-img src="/assets/shapes.svg"></ion-img>
+  <div *ngIf="client">
+      <ion-card-header>
+          <ion-card-subtitle>Solicitud de Crédito</ion-card-subtitle>
+          <ion-card-title>Bienvenido, {{client.firstname}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Por favor ingrese todos los campos, para poder evaluar su crédito.</p>
+          <form  *ngIf="form" [formGroup]="form" >
+          <ion-item>
+              <ion-label position="floating">  <ion-icon name="contact"></ion-icon>
+               Nit {{ !this.form.controls.nit.invalid ? '' : '*'}}</ion-label>
+              <ion-input type="text"  formControlName="nit" requiered></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">  <ion-icon name="contact"></ion-icon>
+               Nombre Empresa {{ !this.form.controls.name.invalid ? '' : '*'}}</ion-label>
+              <ion-input type="text"  formControlName="name" requiered></ion-input>
+            </ion-item>
+           <ion-item>
+              <ion-label position="floating">Salario Actual {{this.form.controls.salary.value != '' ? (this.form.controls.salary.value | currency) : ''}} {{ !this.form.controls.salary.invalid ? '' : '*'}}</ion-label>
+              <ion-input requiered type="number" formControlName="salary" min="1" max="99999999" (change)="validateSalary()" ></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating"> <ion-icon name="ice-cream"></ion-icon> Fecha de Ingreso {{ !this.form.controls.date  .invalid ? '' : '*'}}</ion-label>
+               <ion-datetime requiered displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" clearInput formControlName="date" [max]="minDate"></ion-datetime>
+             </ion-item>
+            <ion-button (click)="createRequest()"  [disabled]="!isReadyToSave" ion-button color="tertiary" expand="block">Consultar</ion-button>
+            </form>
+        </ion-card-content>
+  </div>
+  <div *ngIf="!client">
+
+      <ion-card-header>
+          <ion-card-subtitle>Solicitud de Crédito</ion-card-subtitle>
+          <ion-card-title>Bienvenido</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Antes debe registrase como cliente.</p>
+        </ion-card-content>
+ 
+  </div>
+    </ion-card>
+    
+</ion-content>

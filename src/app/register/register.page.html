@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Registro
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>Ingrese sus datos</h3>
+<form  *ngIf="form" [formGroup]="form" >
+  <ion-item>
+    <ion-label class="labelsM" floating>  <ion-icon name="contact"></ion-icon>
+     Nombres {{ !this.form.controls.firstname.invalid ? '' : '*'}}</ion-label>
+    <ion-input type="text"  formControlName="firstname" requiered></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label class="labelsM" floating>  <ion-icon name="contact"></ion-icon>
+     Apellidos {{ !this.form.controls.lastname.invalid ? '' : '*'}}</ion-label>
+    <ion-input type="text"  formControlName="lastname" requiered></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating> <ion-icon name="ice-cream"></ion-icon> Fecha de Nacimiento {{ !this.form.controls.birthdate.invalid ? '' : '*'}}</ion-label>
+   <ion-datetime requiered displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" clearInput formControlName="birthdate" (ionChange)="validateDate()"></ion-datetime>
+ </ion-item>
+  <ion-item>
+    <ion-label fixed>No. de Identificación {{ !this.form.controls.identification.invalid ? '' : '*'}}</ion-label>
+    <ion-input requiered type="number" formControlName="identification" min="1" ></ion-input>
+    
+  </ion-item>
+
+  <ion-button (click)="createRegister()"  [disabled]="!isReadyToSave" ion-button color="tertiary" expand="block">Registrar</ion-button>
+</form>
+</ion-content>
